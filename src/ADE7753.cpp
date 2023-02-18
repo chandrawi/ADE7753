@@ -25,11 +25,94 @@ void ADE7753::begin()
 {
     pinMode(_nss, OUTPUT);
     _spi->begin();
+    reset();
 }
 
 void ADE7753::end()
 {
     _spi->end();
+}
+
+void ADE7753::reset()
+{
+    _writeMaskRegister(ADE7753_MODE, ADE7753_SWRST, 2, ADE7753_SWRST);
+    delayMicroseconds(18);
+    _writeMaskRegister(ADE7753_MODE, 0x0000, 2, ADE7753_SWRST);
+}
+
+uint8_t ADE7753::getVersion()
+{
+    return _readRegister(ADE7753_DIEREV, 1);
+}
+
+void ADE7753::setHpfEnable(bool en)
+{
+    uint16_t value = en ? 0x0000 : ADE7753_DISHPF;
+    _writeMaskRegister(ADE7753_MODE, value, 2, ADE7753_DISHPF);
+}
+
+void ADE7753::setLpfEnable(bool en)
+{
+    uint16_t value = en ? 0x0000 : ADE7753_DISLPF2;
+    _writeMaskRegister(ADE7753_MODE, value, 2, ADE7753_DISLPF2);
+}
+
+void ADE7753::setCfEnable(bool en)
+{
+    uint16_t value = en ? 0x0000 : ADE7753_DISCF;
+    _writeMaskRegister(ADE7753_MODE, value, 2, ADE7753_DISCF);
+}
+
+void ADE7753::setSagEnable(bool en)
+{
+    uint16_t value = en ? 0x0000 : ADE7753_DISSAG;
+    _writeMaskRegister(ADE7753_MODE, value, 2, ADE7753_DISSAG);
+}
+
+void ADE7753::suspend(bool suspend)
+{
+    uint16_t value = suspend ? ADE7753_DISSAG : 0x0000;
+    _writeMaskRegister(ADE7753_MODE, value, 2, ADE7753_DISSAG);
+}
+
+void ADE7753::setCycleMode(bool cyc)
+{
+    uint16_t value = cyc ? ADE7753_CYCMODE : 0x0000;
+    _writeMaskRegister(ADE7753_MODE, value, 2, ADE7753_CYCMODE);
+}
+
+void ADE7753::setCh1Enable(bool en)
+{
+    uint16_t value = en ? 0x0000 : ADE7753_DISCH1;
+    _writeMaskRegister(ADE7753_MODE, value, 2, ADE7753_DISCH1);
+}
+
+void ADE7753::setCh2Enable(bool en)
+{
+    uint16_t value = en ? 0x0000 : ADE7753_DISCH2;
+    _writeMaskRegister(ADE7753_MODE, value, 2, ADE7753_DISCH2);
+}
+
+void ADE7753::setSwap(bool swap)
+{
+    uint16_t value = swap ? ADE7753_SWAP : 0x0000;
+    _writeMaskRegister(ADE7753_MODE, value, 2, ADE7753_SWAP);
+}
+
+void ADE7753::setDataRate(uint16_t dtrt)
+{
+    _writeMaskRegister(ADE7753_MODE, dtrt, 2, ADE7753_DTRT);
+}
+
+void ADE7753::setWaveSelect(uint16_t wavsel)
+{
+    _writeMaskRegister(ADE7753_MODE, wavsel, 2, ADE7753_WAVSEL);
+}
+
+void ADE7753::setPoamEnable(bool en)
+{
+    uint16_t value = en ? ADE7753_POAM : 0x0000;
+    _writeMaskRegister(ADE7753_MODE, value, 2, ADE7753_POAM);
 }
 
 uint32_t ADE7753::_readRegister(uint8_t address, uint8_t length)

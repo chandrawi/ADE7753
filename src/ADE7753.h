@@ -49,6 +49,31 @@
 #define ADE7753_CHKSUM      0x3E    // 6  (1)
 #define ADE7753_DIEREV      0X3F    // 8  (1)
 
+// Mode Register Mask
+#define ADE7753_DISHPF      0x0001
+#define ADE7753_DISLPF2     0x0002
+#define ADE7753_DISCF       0x0004
+#define ADE7753_DISSAG      0x0008
+#define ADE7753_ASUSPEND    0x0010
+#define ADE7753_TEMPSEL     0x0020
+#define ADE7753_SWRST       0x0040
+#define ADE7753_CYCMODE     0x0080
+#define ADE7753_DISCH1      0x0100
+#define ADE7753_DISCH2      0x0200
+#define ADE7753_SWAP        0x0400
+#define ADE7753_DTRT        0x1800
+#define ADE7753_WAVSEL      0x6000
+#define ADE7753_POAM        0x8000
+
+// Configuration Constants
+#define ADE7753_DR_1_128    0x0000
+#define ADE7753_DR_1_256    0x0800
+#define ADE7753_DR_1_512    0x1000
+#define ADE7753_DR_1_1024   0x1800
+#define ADE7753_WAV_PWR     0x0000
+#define ADE7753_WAV_CH1     0x4000
+#define ADE7753_WAV_CH2     0x6000
+
 #define ADE7753_SPI_FREQ    F_CPU / 4
 #define ADE7753_TRA_DEL     4
 
@@ -62,6 +87,22 @@ public:
 
     void begin();
     void end();
+    void reset();
+    uint8_t getVersion();
+
+    // Mode settings
+    void setHpfEnable(bool en = true);
+    void setLpfEnable(bool en = true);
+    void setCfEnable(bool en = true);
+    void setSagEnable(bool en = true);
+    void suspend(bool suspend = true);
+    void setCycleMode(bool cyc = true);
+    void setCh1Enable(bool en = true);
+    void setCh2Enable(bool en = true);
+    void setSwap(bool swap = true);
+    void setDataRate(uint16_t dtrt);
+    void setWaveSelect(uint16_t wavsel);
+    void setPoamEnable(bool en = true);
 
 private:
 
