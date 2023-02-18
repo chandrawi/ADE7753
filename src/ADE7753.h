@@ -65,7 +65,25 @@
 #define ADE7753_WAVSEL      0x6000
 #define ADE7753_POAM        0x8000
 
+// Channel 1 & 2 Offset Adjust and Gain Mask
+#define ADE7753_OS_VAL      0x1F
+#define ADE7753_OS_SIGN     0x20
+#define ADE7753_ITGR_EN     0x80
+#define ADE7753_CH1_GAIN    0x07
+#define ADE7753_CH1_FS      0x18
+#define ADE7753_CH2_GAIN    0xE0
+
 // Configuration Constants
+#define ADE7753_ITGR_OFF    0x00
+#define ADE7753_ITGR_ON     0x80
+#define ADE7753_GAIN_1      0x00
+#define ADE7753_GAIN_2      0x21
+#define ADE7753_GAIN_4      0x42
+#define ADE7753_GAIN_8      0x63
+#define ADE7753_GAIN_16     0x84
+#define ADE7753_FS_0_5V     0x00
+#define ADE7753_FS_0_25V    0x08
+#define ADE7753_FS_0_125V   0x10
 #define ADE7753_DR_1_128    0x0000
 #define ADE7753_DR_1_256    0x0800
 #define ADE7753_DR_1_512    0x1000
@@ -103,6 +121,22 @@ public:
     void setDataRate(uint16_t dtrt);
     void setWaveSelect(uint16_t wavsel);
     void setPoamEnable(bool en = true);
+
+    // Gain, Offset, Calibration, and Integrator settings
+    void setCh1Gain(uint8_t gain);
+    void setCh1FullScale(uint8_t fs);
+    void setCh2Gain(uint8_t gain);
+    void setCh1Offset(int8_t os);
+    void setCh1Integrator(bool itgr);
+    void setCh2Offset(int8_t os);
+    void setCh1RmsOffset(int16_t os);
+    void setCh2RmsOffset(int16_t os);
+    void setPhaseCal(int8_t cal);
+    void setPowerOffset(int16_t os);
+    void setWPowerGain(int16_t gain);
+    void setWPowerDivision(uint8_t div);
+    void setVAPowerGain(int16_t gain);
+    void setVAPowerDivision(uint8_t div);
 
 private:
 

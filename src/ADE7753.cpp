@@ -115,6 +115,81 @@ void ADE7753::setPoamEnable(bool en)
     _writeMaskRegister(ADE7753_MODE, value, 2, ADE7753_POAM);
 }
 
+void ADE7753::setCh1Gain(uint8_t gain)
+{
+    _writeMaskRegister(ADE7753_GAIN, gain, 1, ADE7753_CH1_GAIN);
+}
+
+void ADE7753::setCh1FullScale(uint8_t fs)
+{
+    _writeMaskRegister(ADE7753_GAIN, fs, 1, ADE7753_CH1_FS);
+}
+
+void ADE7753::setCh2Gain(uint8_t gain)
+{
+    _writeMaskRegister(ADE7753_GAIN, gain, 1, ADE7753_CH2_GAIN);
+}
+
+void ADE7753::setCh1Offset(int8_t os)
+{
+    uint8_t osval = os & ADE7753_OS_VAL;
+    osval = os < 0 ? osval | ADE7753_OS_SIGN : osval;
+    _writeMaskRegister(ADE7753_CH1OS, osval, 1, ADE7753_OS_VAL | ADE7753_OS_SIGN);
+}
+
+void ADE7753::setCh1Integrator(bool itgr)
+{
+    uint16_t value = itgr ? ADE7753_ITGR_EN : 0x0000;
+    _writeMaskRegister(ADE7753_CH1OS, value, 1, ADE7753_ITGR_EN);
+}
+
+void ADE7753::setCh2Offset(int8_t os)
+{
+    uint8_t osval = os & ADE7753_OS_VAL;
+    osval = os < 0 ? osval : osval | ADE7753_OS_SIGN;
+    _writeMaskRegister(ADE7753_CH2OS, osval, 1, ADE7753_OS_VAL | ADE7753_OS_SIGN);
+}
+
+void ADE7753::setCh1RmsOffset(int16_t os)
+{
+    _writeRegister(ADE7753_IRMSOS, os, 2);
+}
+
+void ADE7753::setCh2RmsOffset(int16_t os)
+{
+    _writeRegister(ADE7753_VRMSOS, os, 2);
+}
+
+void ADE7753::setPhaseCal(int8_t cal)
+{
+    _writeRegister(ADE7753_PHCAL, cal, 1);
+}
+
+void ADE7753::setPowerOffset(int16_t os)
+{
+    _writeRegister(ADE7753_APOS, os, 2);
+}
+
+void ADE7753::setWPowerGain(int16_t gain)
+{
+    _writeRegister(ADE7753_WGAIN, gain, 2);
+}
+
+void ADE7753::setWPowerDivision(uint8_t div)
+{
+    _writeRegister(ADE7753_WDIV, div, 1);
+}
+
+void ADE7753::setVAPowerGain(int16_t gain)
+{
+    _writeRegister(ADE7753_VAGAIN, gain, 2);
+}
+
+void ADE7753::setVAPowerDivision(uint8_t div)
+{
+    _writeRegister(ADE7753_VADIV, div, 1);
+}
+
 uint32_t ADE7753::_readRegister(uint8_t address, uint8_t length)
 {
     // Hold max 24-bit data (3 bytes)
