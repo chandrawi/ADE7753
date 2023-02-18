@@ -138,6 +138,19 @@ public:
     void setVAPowerGain(int16_t gain);
     void setVAPowerDivision(uint8_t div);
 
+    // Read waveform, current, voltage, energy, and period
+    int32_t readWaveForm();
+    int32_t readAEnergy();
+    int32_t readLineAEnergy();
+    uint32_t readVAEnergy();
+    uint32_t readLineVAEnergy();
+    uint32_t readLineVAREnergy();
+    uint32_t readCurrentRMS();
+    uint32_t readVoltageRMS();
+    uint32_t readCurrentPeak();
+    uint32_t readVoltagePeak();
+    uint16_t readPeriod();
+
 private:
 
     SPIClass* _spi;

@@ -190,6 +190,61 @@ void ADE7753::setVAPowerDivision(uint8_t div)
     _writeRegister(ADE7753_VADIV, div, 1);
 }
 
+int32_t ADE7753::readWaveForm()
+{
+    return _readRegister(ADE7753_WAVEFORM, 3);
+}
+
+int32_t ADE7753::readAEnergy()
+{
+    return _readRegister(ADE7753_AENERGY, 3);
+}
+
+int32_t ADE7753::readLineAEnergy()
+{
+    return _readRegister(ADE7753_LAENERGY, 3);
+}
+
+uint32_t ADE7753::readVAEnergy()
+{
+    return _readRegister(ADE7753_VAENERGY, 3);
+}
+
+uint32_t ADE7753::readLineVAEnergy()
+{
+    return _readRegister(ADE7753_LVAENERGY, 3);
+}
+
+uint32_t ADE7753::readLineVAREnergy()
+{
+    return _readRegister(ADE7753_LVARENERGY, 3);
+}
+
+uint32_t ADE7753::readCurrentRMS()
+{
+    return _readRegister(ADE7753_IRMS, 3);
+}
+
+uint32_t ADE7753::readVoltageRMS()
+{
+    return _readRegister(ADE7753_VRMS, 3);
+}
+
+uint32_t ADE7753::readCurrentPeak()
+{
+    return _readRegister(ADE7753_RSTIPEAK, 3);
+}
+
+uint32_t ADE7753::readVoltagePeak()
+{
+    return _readRegister(ADE7753_RSTVPEAK, 3);
+}
+
+uint16_t ADE7753::readPeriod()
+{
+    return _readRegister(ADE7753_PERIOD, 2);
+}
+
 uint32_t ADE7753::_readRegister(uint8_t address, uint8_t length)
 {
     // Hold max 24-bit data (3 bytes)
