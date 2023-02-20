@@ -172,7 +172,7 @@ public:
     void setCh1PeakLevel(uint8_t lvl);
     void setCh2PeakLevel(uint8_t lvl);
 
-    // Read waveform, current, voltage, energy, and period
+    // Read waveform, current, voltage, energy, period, and temperature
     int32_t readWaveForm();
     int32_t readAEnergy();
     int32_t readLineAEnergy();
@@ -184,6 +184,7 @@ public:
     uint32_t readCurrentPeak();
     uint32_t readVoltagePeak();
     uint16_t readPeriod();
+    uint8_t readTemperature();
 
 private:
 

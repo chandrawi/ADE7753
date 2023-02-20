@@ -300,6 +300,16 @@ uint16_t ADE7753::readPeriod()
     return _readRegister(ADE7753_PERIOD, 2);
 }
 
+uint8_t ADE7753::readTemperature()
+{
+    _writeMaskRegister(ADE7753_MODE, ADE7753_TEMPSEL, 2, ADE7753_TEMPSEL);
+    while (!(status() & ADE7753_TEMPC)) {
+        yield();
+    }
+    _writeMaskRegister(ADE7753_MODE, 0x0000, 2, ADE7753_TEMPSEL);
+    return _readRegister(ADE7753_TEMP, 1);
+}
+
 uint32_t ADE7753::_readRegister(uint8_t address, uint8_t length)
 {
     // Hold max 24-bit data (3 bytes)
