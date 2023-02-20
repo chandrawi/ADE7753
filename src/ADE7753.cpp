@@ -205,6 +205,46 @@ void ADE7753::setVAPowerDivision(uint8_t div)
     _writeRegister(ADE7753_VADIV, div, 1);
 }
 
+void ADE7753::setCFNum(uint16_t num)
+{
+    _writeRegister(ADE7753_CFNUM, num, 2);
+}
+
+void ADE7753::setCFDen(uint16_t den)
+{
+    _writeRegister(ADE7753_CFDEN, den, 2);
+}
+
+void ADE7753::setLineCycle(uint16_t ncyc)
+{
+    _writeRegister(ADE7753_LINECYC, ncyc, 2);
+}
+
+void ADE7753::setZXTimeout(uint16_t tout)
+{
+    _writeRegister(ADE7753_ZXTOUT, tout, 2);
+}
+
+void ADE7753::setSAGCycle(uint8_t ncyc)
+{
+    _writeRegister(ADE7753_SAGCYC, ncyc, 1);
+}
+
+void ADE7753::setSAGLevel(uint8_t lvl)
+{
+    _writeRegister(ADE7753_SAGLVL, lvl, 1);
+}
+
+void ADE7753::setCh1PeakLevel(uint8_t lvl)
+{
+    _writeRegister(ADE7753_IPKLVL, lvl, 1);
+}
+
+void ADE7753::setCh2PeakLevel(uint8_t lvl)
+{
+    _writeRegister(ADE7753_VPKLVL, lvl, 1);
+}
+
 int32_t ADE7753::readWaveForm()
 {
     return _readRegister(ADE7753_WAVEFORM, 3);

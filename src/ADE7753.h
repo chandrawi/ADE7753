@@ -160,6 +160,18 @@ public:
     void setVAPowerGain(int16_t gain);
     void setVAPowerDivision(uint8_t div);
 
+    // Counter frequency settings
+    void setCFNum(uint16_t num);
+    void setCFDen(uint16_t den);
+
+    // Line cycle, zero cross, SAG and peak detection settings
+    void setLineCycle(uint16_t ncyc);
+    void setZXTimeout(uint16_t tout);
+    void setSAGCycle(uint8_t ncyc);
+    void setSAGLevel(uint8_t lvl);
+    void setCh1PeakLevel(uint8_t lvl);
+    void setCh2PeakLevel(uint8_t lvl);
+
     // Read waveform, current, voltage, energy, and period
     int32_t readWaveForm();
     int32_t readAEnergy();
