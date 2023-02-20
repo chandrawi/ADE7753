@@ -115,6 +115,21 @@ void ADE7753::setPoamEnable(bool en)
     _writeMaskRegister(ADE7753_MODE, value, 2, ADE7753_POAM);
 }
 
+void ADE7753::setInterrupt(uint16_t intMode)
+{
+    _writeMaskRegister(ADE7753_IRQEN, intMode, 2, intMode);
+}
+
+void ADE7753::clearInterrupt(uint16_t intMode)
+{
+    _writeMaskRegister(ADE7753_IRQEN, 0x0000, 2, intMode);
+}
+
+uint16_t ADE7753::status()
+{
+    return _readRegister(ADE7753_RSTSTATUS, 2);
+}
+
 void ADE7753::setCh1Gain(uint8_t gain)
 {
     _writeMaskRegister(ADE7753_GAIN, gain, 1, ADE7753_CH1_GAIN);

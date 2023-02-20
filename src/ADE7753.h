@@ -65,6 +65,23 @@
 #define ADE7753_WAVSEL      0x6000
 #define ADE7753_POAM        0x8000
 
+// Interrupt Status Register Mask
+#define ADE7753_AEHF        0x0001
+#define ADE7753_SAG         0x0002
+#define ADE7753_CYCEND      0x0004
+#define ADE7753_WSMP        0x0008
+#define ADE7753_ZX          0x0010
+#define ADE7753_TEMPC       0x0020
+#define ADE7753_RESET       0x0040
+#define ADE7753_AEOF        0x0080
+#define ADE7753_PKV         0x0100
+#define ADE7753_PKI         0x0200
+#define ADE7753_VAEHF       0x0400
+#define ADE7753_VAEOF       0x0800
+#define ADE7753_ZXTO        0x1000
+#define ADE7753_PPOS        0x2000
+#define ADE7753_PNEG        0x4000
+
 // Channel 1 & 2 Offset Adjust and Gain Mask
 #define ADE7753_OS_VAL      0x1F
 #define ADE7753_OS_SIGN     0x20
@@ -121,6 +138,11 @@ public:
     void setDataRate(uint16_t dtrt);
     void setWaveSelect(uint16_t wavsel);
     void setPoamEnable(bool en = true);
+
+    // Interrupt setting and status
+    void setInterrupt(uint16_t intMode);
+    void clearInterrupt(uint16_t intMode);
+    uint16_t status();
 
     // Gain, Offset, Calibration, and Integrator settings
     void setCh1Gain(uint8_t gain);
